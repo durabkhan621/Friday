@@ -3,3 +3,6 @@ langchain_google_genai
 streamlit
 langchain_community
 faiss-cpu
+flask
+flask_restful
+flask_cors

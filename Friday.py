@@ -9,6 +9,7 @@ import pickle
 api_key = 'AIzaSyA-iD_a5JYihcpvMvOh3YwLYT_nNrLVb6c'
 synonyms_explain_in_detail = [
     "Elaborate",
+    "Explain"
     "Expound",
     "Clarify",
     "Illustrate",
@@ -39,7 +40,7 @@ initialized = False
 @st.cache_resource()
 def initialize():
     print("Reading database from pkl format...")
-    with open('vectorindex_retriever.pkl', 'rb') as f:
+    with open('vectorindex_retriever_0.2.pkl', 'rb') as f:
         db = pickle.load(f)
 
 
@@ -66,7 +67,8 @@ def get_answer_google_palm(question):
     contains_synonym = any(word in question for word in synonyms_explain_in_detail)
 
     if contains_synonym:
-        return chain_detailed_refine.invoke(question)['answer']
+        # return chain_detailed_refine.invoke(question)['answer']
+        return chain_precise.invoke(question)['answer']
     return chain_precise.invoke(question)['answer']
 
 # Define the Streamlit app
